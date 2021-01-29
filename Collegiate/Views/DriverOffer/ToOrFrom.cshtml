@@ -1,0 +1,21 @@
+﻿
+@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Where you headed, stranger?</title>
+</head>
+<body>
+    <section class="container container-fluid">
+        <div class="form-row bg-warning">
+            <div class="col"><button type="button" onclick="location.href='@Url.Action("CreateToNMC", "DriverOffer")'" class="btn btn-success col-md-4">I Need A Ride To NMC</button></div>
+            <div class="col"><button type="button" onclick="location.href='@Url.Action("CreateFromNMC", "RiderRequest")'" class="btn btn-success col-md-4">I Need A Ride From NMC</button></div>
+        </div>
+    </section>
+</body>
+</html>

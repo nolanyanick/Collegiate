@@ -1,0 +1,54 @@
+﻿@model Collegiate.ViewModels.RiderRequestFromNMCViewModel
+
+@{
+    ViewData["Title"] = "Book A Ride From NMC";
+}
+
+<h1>Get Home!</h1>
+
+<h4>Book A Ride From NMC</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateFromNMC">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="RiderRequestId" class="form-control" />
+                <span asp-validation-for="RiderRequestId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartTime" class="control-label"></label>
+                @Html.TextBoxFor(m => m.DepartTime, new { @type = "time", @class = "form-control" })
+                <span asp-validation-for="DepartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartDate" class="control-label"></label>
+                @Html.TextBoxFor(m => m.DepartDate, new { @type = "date", @min = DateTime.UtcNow.AddDays(1).ToString("yyyy-MM-dd"), @max = DateTime.UtcNow.AddYears(1).ToString("yyyy-MM-dd"), @class = "form-control" })
+                <span asp-validation-for="DepartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartCampus" class="control-label"></label>
+                <input asp-for="DepartCampus" class="form-control" />
+                <span asp-validation-for="DepartCampus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RiderComments" class="control-label"></label>
+                <textarea asp-for="RiderComments" class="form-control"></textarea>
+                <span asp-validation-for="RiderComments" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationAddressID" class="control-label"></label>
+                <input asp-for="DestinationAddressID" class="form-control" />
+                <span asp-validation-for="DestinationAddressID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,121 @@
+﻿@model Collegiate.ViewModels.RiderRequestToNMCViewModel
+
+@{
+    ViewData["Title"] = "Book a Ride To NMC";
+
+}
+
+<h1>Get To Class!</h1>
+
+<h4>Book a Ride To NMC</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="CreateToNMC">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DepartTime" class="control-label"></label>
+                @Html.TextBoxFor(m => m.DepartTime, new { @type = "time", @class = "form-control" })
+                <span asp-validation-for="DepartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartDate" class="control-label"></label>
+                @Html.TextBoxFor(m => m.DepartDate, new { @type = "date", @min = DateTime.UtcNow.AddDays(1).ToString("yyyy-MM-dd"), @max = DateTime.UtcNow.AddYears(1).ToString("yyyy-MM-dd"), @class = "form-control" })
+                <span asp-validation-for="DepartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArriveCampus" class="control-label">Campus Destination: </label>
+                @Html.DropDownListFor(m => m.ArriveCampus, Model.CampusList, new { @class = "form-control" })
+                <div class="col-md-12"><span asp-validation-for="ArriveCampus" class="text-danger"></span></div>
+            </div>
+            <div class="form-group">
+                @{ if ((Model.AddressList != null) && (Model.AddressList.Any()))
+                    {
+                        <label asp-for="AddressID" class="control-label">Select a pickup address or enter one manually...</label>
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.AddressID, new SelectList(Model.AddressList, "AddressId", "LocationName", Model.AddressID), new { @class = "form-control", @id = "address" })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="con">Please enter an address below.</div>
+                    }
+                }
+            </div>
+            <div id="manual">
+                <div class="form-group">
+                    <label class="control-label" asp-for="ManualAddress.Type">What type of pickup location is this?</label>
+                    <div>@Html.DropDownListFor(model => model.ManualAddress.Type, (List<SelectListItem>)Model.LocationTypeList, new { @class = "form-control" })</div>
+                    <span asp-validation-for="ManualAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ManualAddress.LocationName" class="control-label">Location Name</label>
+                    <input asp-for="ManualAddress.LocationName" class="form-control" />
+                    <span asp-validation-for="ManualAddress.LocationName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ManualAddress.Address1" class="control-label">Address 1</label>
+                    <input asp-for="ManualAddress.Address1" class="form-control" />
+                    <span asp-validation-for="ManualAddress.Address1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ManualAddress.Address2" class="control-label">Address 2</label>
+                    <input asp-for="ManualAddress.Address2" class="form-control" />
+                    <span asp-validation-for="ManualAddress.Address2" class="text-danger"></span>
+                </div>
+                <div class="form-row form-group">
+                    <div class="col">
+                        <label asp-for="ManualAddress.City" class="control-label">City</label>
+                        <input asp-for="ManualAddress.City" class="form-control" />
+                        <span asp-validation-for="ManualAddress.City" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="ManualAddress.Zip" class="control-label">Zip</label>
+                        <input asp-for="ManualAddress.Zip" class="form-control" />
+                        <span asp-validation-for="ManualAddress.Zip" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            @*I feel like this is very similar to rider comments.*@
+            @*<div class="form-group">
+                    <label asp-for="ManualAddress.PickupLocationDescription" class="control-label">Let the driver know how to find you</label>
+                    <textarea asp-for="ManualAddress.PickupLocationDescription" class="form-control"></textarea>
+                    <span asp-validation-for="ManualAddress.PickupLocationDescription" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <label asp-for="RiderComments" class="control-label"></label>
+                <textarea asp-for="RiderComments" class="form-control"></textarea>
+                <span asp-validation-for="RiderComments" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NeedReturnTrip" /> @Html.DisplayNameFor(model => model.NeedReturnTrip)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" /> @{Console.WriteLine("enter break here");}
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($("#address").val() == "")
+                $("#manual").show();
+            else
+                $("#manual").hide();
+        });
+        $("#address").change(function () {
+            if ($("#address").val() == "")
+                $("#manual").show();
+            else
+                $("#manual").hide();
+        });
+    </script>
+}

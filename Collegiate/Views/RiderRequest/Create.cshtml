@@ -1,0 +1,45 @@
+﻿@model Collegiate.Models.RiderRequest
+
+@{
+    ViewData["Title"] = "Create Request";
+}
+
+<h1>Create a Ride Request</h1>
+<form asp-area="" asp-controller="RideRequest" asp-action="Create" method="post">
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group" style="display: table-cell;">
+        @*Departure Time*@
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" name="Destination" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group" style="display: table-cell;">
+        @*Departure Time*@
+        <label asp-for="DepartureTime"></label>
+        <input asp-for="DepartureTime" class="form-control" name="DepartureTime" />
+        <span asp-validation-for="DepartureTime" class="text-danger"></span>
+        @*Arrival Time*@
+        <label asp-for="ArrivalTime"></label>
+        <input asp-for="ArrivalTime" class="form-control" name="ArrivalTime" />
+        <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group" style="display: table-cell;">
+        @*Departure Time*@
+        <label asp-for="Campus"></label>
+        <input asp-for="Campus" class="form-control" name="Campus" />
+        <span asp-validation-for="Campus" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group" style="display: table-cell;">
+        @*Departure Time*@
+        <label asp-for="RiderComments"></label>
+        <input asp-for="RiderComments" class="form-control" name="RiderComments" />
+        <span asp-validation-for="RiderComments" class="text-danger"></span>
+    </div>
+</form>
+<p>By posting a ride request, you are agreeing to the <a asp-area="" asp-controller="Home" asp-action="TermsAndConditions">Terms and Conditions</a></p>
+<br />
+<button type="submit" class="btn btn-primary">Post Request</button>

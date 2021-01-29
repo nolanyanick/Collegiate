@@ -1,0 +1,298 @@
+﻿@{
+    ViewData["Title"] = "Requests & Offers";
+    @model Collegiate.Models.CalandarVM;
+}
+
+<style>
+    .sidenav {
+        min-width: 20vw;
+    }
+</style>
+
+<!-- Model data -->
+<script>
+
+    var offers = @Html.Raw(Json.Serialize(Model.DriverOffers));
+    var requests = @Html.Raw(Json.Serialize(Model.RiderRequest));
+</script>
+<div class="container" id="wraper">
+    <div class="overflow-auto row border-bottom" id="sidebar-wrapper" style="height:300px">
+        @*<div class="sidebar-heading">Rides and Request</div>*@
+        <div class="col">
+            @**********************This is where you would hard code in values for ride request cards************@
+            @{if ((Model.UserRequests != null) && (Model.UserRequests.Any()))
+                {//<a href="#rideRequestCollapse" class="list-group-item list-group-item-action bg-light" data-toggle="colapse" aria-expanded="false">Ride Request</a>
+
+                    <div class="container">
+                        <div class="row">
+                            <h4 class="col-7">Your Requests</h4>
+                            <button type="button" onclick="location.href='@Url.Action("ToOrFrom", "RiderRequest")'" class="btn btn-outline-success col-5">Add a Request!</button>
+                        </div>
+                    </div>
+
+                    <div class="card" id="redeRequestCollapse">
+                        <div>
+
+                            <table id="requestsTable1" class="table table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="border:none">Departure Time</th>
+                                        <th scope="col" style="border:none">Arrival Time</th>
+                                        <th scope="col" style="border:none"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                                        foreach (var item in Model.UserRequests)
+                                        {
+                                            var address = Model.Locations.ToList().Find(i => i.AddressId == item.AddressId);
+                                            <tr>
+                                                <td> @item.DepartureTime.ToString(" M/d/yyyy h:mm tt")</td>
+                                                <td> @item.ArrivalTime.ToString(" M/d/yyyy h:mm tt")</td>
+                                                <td>
+                                                    <button class="btn btn-link">Edit</button> @*change this to an action link*@
+                                                    <button class="btn btn-link">Cancel</button>@*change this to an action link*@
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <h4>Your Requests</h4>
+
+                    <div class="card">
+                        <div>
+                            <table id="requestsTable1" class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="border:none">No Requests Currently Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <td><button type="button" onclick="location.href='@Url.Action("ToOrFrom", "RiderRequest")'" class="btn btn-outline-success ">Add a Request!</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col">
+            @**********************This is where you would hard code in values for driver offer cards************@
+            @{if ((Model.RiderRequest != null) && (!Model.RiderRequest.Any()))
+                {//<a href="#driverOfferCollapse" class="list-group-item list-group-item-action bg-light" data-toggle="colapse" aria-expanded="false">Driver Offers</a>
+
+                    <div class="container">
+                        <div class="row">
+                            <h4 class="col">Your Offers</h4>
+                            <button type="button" onclick="location.href='@Url.Action("ToOrFrom", "RiderRequest")'" class="btn btn-outline-success col">Add an Offer!</button>
+                        </div>
+                    </div>
+
+                    <div class="card" id="driverOfferCollapse">
+                        <div>
+
+                            <table id="requestsTable1" class="table table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="border:none">Departure Time</th>
+                                        <th scope="col" style="border:none">Arrival Time</th>
+                                        <th scope="col" style="border:none"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                                        foreach (var item in Model.UserRequests)
+                                        {
+                                            var address = Model.Locations.ToList().Find(i => i.AddressId == item.AddressId);
+                                            <tr>
+                                                <td> @item.DepartureTime.ToString(" M/d/yyyy h:mm tt")</td>
+                                                <td> @item.ArrivalTime.ToString(" M/d/yyyy h:mm tt")</td>
+                                                <td>
+                                                    <button class="btn btn-link">Edit</button> @*change this to an action link*@
+                                                    <button class="btn btn-link">Cancel</button>@*change this to an action link*@
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+                    <h4>Your Offers</h4>
+
+                    <div class="card">
+                        <div>
+                            <table id="requestsTable1" class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="border:none">No Offers Currently Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <td><button type="button" onclick="location.href='@Url.Action("ToOrFrom", "RiderRequest")'" class="btn btn-outline-success ">Add an Offer!</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col">
+            @**********************This is where you would hard code in values for booked trip cards************@
+
+            @{if ((Model.RiderRequest != null) && (!Model.RiderRequest.Any()))
+                {//<a href="#bookedTripsCollapse" class="list-group-item list-group-item-action bg-light" data-toggle="colapse" aria-expanded="false">Booked Trips</a>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <h4 class="col">Your Trips</h4>
+                            <button type="button" onclick="location.href='@Url.Action("ToOrFrom", "RiderRequest")'" class="btn btn-outline-success col">Add a Trip!</button>
+                        </div>
+                    </div>
+
+                    <div class="card" id="bookedTripsCollapse">
+                        <div>
+
+                            <table id="requestsTable1" class="table table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="border:none">Departure Time</th>
+                                        <th scope="col" style="border:none">Arrival Time</th>
+                                        <th scope="col" style="border:none"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                                        foreach (var item in Model.UserRequests)
+                                        {
+                                            var address = Model.Locations.ToList().Find(i => i.AddressId == item.AddressId);
+                                            <tr>
+                                                <td> @item.DepartureTime</td>
+                                                <td> @item.ArrivalTime</td>
+                                                <td>
+                                                    <button class="btn btn-link">Edit</button> @*change this to an action link*@
+                                                    <button class="btn btn-link">Cancel</button>@*change this to an action link*@
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <h4>Your Trips</h4>
+
+                    <div class="card">
+                        <div>
+                            <table id="requestsTable1" class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="border:none">No Trips Currently Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <td><button type="button" onclick="location.href='@Url.Action("ToOrFrom", "RiderRequest")'" class="btn btn-outline-success">Book a trip!</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Calendar-->
+        <calendar year="2020" month="@Model.Month" />
+
+        <!-- Requests Modal -->
+        <div id="RequestsModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Requests</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <input type="text" id="requestsSearchInput" onkeyup="requestsSearch()" placeholder="Search for locations...">
+
+                        <table id="requestsTable" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="border:none">Leaving From</th>
+                                    <th scope="col" style="border:none">Going To</th>
+                                    <th scope="col" style="border:none">Departure Time</th>
+                                    <th scope="col" style="border:none">Arrival Time</th>
+                                    <th scope="col" style="border:none"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="requestsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Offers Modal -->
+        <div id="OffersModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Offers</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <input type="text" id="offersSearchInput" onkeyup="offersSearch()" placeholder="Search for locations...">
+
+                        <table id="offersTable" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="border:none">Leaving From</th>
+                                    <th scope="col" style="border:none">Going To</th>
+                                    <th scope="col" style="border:none">Departure Time</th>
+                                    <th scope="col" style="border:none">Arrival Time</th>
+                                    <th scope="col" style="border:none"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="offersTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
