@@ -4,4 +4,4 @@ Senior Capstone project for Northwestern Michigan College. A ride sharing app de
 Additional contributions credited to: Skormie, chance221, briekellis
 
 Collegiate is a web app designed to be a platform for Northwestern Michigan College students to utilize for ride sharing purposes.
-Currently, the app is unusable for it's intented purpose.
+Currently, the app is still in development and won't be usable until further notice. 
