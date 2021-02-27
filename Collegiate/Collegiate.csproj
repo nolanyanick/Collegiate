@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-Collegiate-43561320-011E-4D6E-8232-CB271359D4B5</UserSecretsId>
+    <ApplicationIcon>LOGO_MARGIN.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -15,6 +16,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200413224251_InitialCreate1.cs" />
     <Compile Remove="Migrations\20200413224251_InitialCreate1.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="LOGO_MARGIN.ico" />
   </ItemGroup>
 
 
