@@ -131,3 +131,47 @@ body {
         height: 5.5vw;
     }
 }
+
+
+
+
+.testcontainer {
+    position: relative;
+    width: 50%;
+}
+
+.testimage {
+    display: block;
+    width:100%;
+    height: auto;
+}
+
+.testoverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #0366d6;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;    
+}
+
+.testcontainer:hover .testoverlay{
+    height: 100%;
+}
+
+
+
+.testtext {
+    white-space: nowrap;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
