@@ -1,14 +1,20 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
 }
 
+.nav-link {    
+    transition-duration: .25s;
+}
+
 /* Provide sufficient contrast against white background */
-a {
+a{
     color: #0366d6;
 }
 
@@ -174,4 +180,32 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
+}
+
+#navOption1 {
+    color:black;
+}
+
+#navOption2 {
+    color: black;
+}
+
+#navOption3 {
+    color: black;
+}
+
+
+ #navOption1:hover{
+    background-color: darkgreen;
+    color: #fff;
+}
+
+#navOption2:hover {
+    background-color: darkgreen;
+    color: #fff;
+}
+
+#navOption3:hover {
+    background-color: darkgreen;
+    color: #fff;
 }
