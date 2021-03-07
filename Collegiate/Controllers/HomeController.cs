@@ -63,7 +63,6 @@ namespace Collegiate.Controllers
         {
             // this gets the id for the user. 
             return View();
-
         }
 
         public IActionResult About()
