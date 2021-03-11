@@ -19,11 +19,9 @@ namespace Collegiate.Models
         public User User { get; set; }
         public ICollection<RiderRequest> RiderRequest { get; set; }
         public ICollection<DriverOffer> DriverOffers { get; set; }
-        public ICollection<Trip> Trips { get; set; }
         public ICollection<RiderRequest> UserRequests { get; set; }
         public ICollection<DriverOffer> UserOffers { get; set; }
         public ICollection<Address> Locations { get; set; }
-        public ICollection<Trip> UserTrips { get; internal set; }
         public DateTime CurrentDate { get; set; }
         public int Day
         {

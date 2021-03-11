@@ -45,8 +45,6 @@ namespace Collegiate.Models
 
         public int SeatsAvailable { get; set; }
 
-        public ICollection<Comment> DriverComments { get; set; }
-
         #region METHODS
 
         //method to remove duplicate buttons based on DepartureTime

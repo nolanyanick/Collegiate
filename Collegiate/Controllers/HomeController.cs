@@ -50,15 +50,6 @@ namespace Collegiate.Controllers
             return View(driverOffers);
         }
 
-        public IActionResult GetAllTrips()
-        {
-            var allTrips = _db.Trips.ToList();
-
-            return View(allTrips);
-        }
-
-
-
         public IActionResult Index()
         {
             // this gets the id for the user. 
@@ -88,16 +79,13 @@ namespace Collegiate.Controllers
             //model
             List<RiderRequest> thisUsersRequest = new List<RiderRequest>();
             List<Address> thisUsersLocations = new List<Address>();
-            List<DriverOffer> thisUsersOffers = new List<DriverOffer>(); //should check to see if they are a driver first. If so display driver offers if not display sign up to be a driver button.
-            List<Trip> thisUsersTrips = new List<Trip>();
+            List<DriverOffer> thisUsersOffers = new List<DriverOffer>(); //should check to see if they are a driver first. If so display driver offers if not display sign up to be a driver button.            
 
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var rideRequests = _db.RiderRequests.ToList();
 
             var driverOffers = _db.DriverOffers.ToList();
-
-            var trips = _db.Trips.ToList();
 
             var locations = _db.Addresses
                                 .Where(a => a.UserId == userId)
@@ -111,31 +99,13 @@ namespace Collegiate.Controllers
                                 .Where(d => d.UserId == userId)
                                 .ToList();
 
-            var listOfTrips = _db.Trips
-                                .ToList();
-
-            foreach (var trip in listOfTrips)
-            {
-                List<TripUsers> assessedTripUsers = trip.TripUsers.ToList();
-                foreach (var user in assessedTripUsers)
-                {
-                    if (user.UserId == userId)
-                    {
-                        thisUsersTrips.Add(trip);
-                    }
-                }
-
-            }
-
             CalandarVM calandarVM = new CalandarVM();
 
             //need to filter the locations based on the userId            
             calandarVM.Locations = locations;
-            calandarVM.Trips = trips;
             calandarVM.Locations = locations;
             calandarVM.UserOffers = thisUsersOffers;
             calandarVM.UserRequests = thisUsersRequest;
-            calandarVM.UserTrips = thisUsersTrips;
 
             foreach (var offer in driverOffers)
                 offer.Address = _db.Addresses.Where(x => x.AddressId == offer.AddressId).FirstOrDefault() as Address;

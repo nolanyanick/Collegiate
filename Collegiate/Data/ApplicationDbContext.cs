@@ -21,34 +21,17 @@ namespace Collegiate.Data
 
         public DbSet<Address> Addresses { get; set; }
 
-        public DbSet<Comment> Comments { get; set; }
-
         public DbSet<Driver> Drivers { get; set; }
 
         public DbSet<DriverOffer> DriverOffers { get; set; }
 
-        public DbSet<Preference> Preferences { get; set; }
-
         public DbSet<RiderRequest> RiderRequests { get; set; }
-
-        public DbSet<Trip> Trips { get; set; }
 
         public DbSet<Vehicle> Vehicles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<TripUsers>()
-                .HasKey(tu => new { tu.UserId, tu.TripId });
-            modelBuilder.Entity<TripUsers>()
-                .HasOne(tu => tu.User)
-                .WithMany(u => u.TripUsers)
-                .HasForeignKey(tu => tu.UserId);
-            modelBuilder.Entity<TripUsers>()
-                .HasOne(tu => tu.Trip)
-                .WithMany(t => t.TripUsers)
-                .HasForeignKey(tu => tu.TripId);
 
             modelBuilder.Entity<User>().HasData(
                 new User { Id = "BFF12317-DB43-B3AC-7AA4-3A8DB536ED64", FirstName = "Aquila", LastName = "Carroll", UserName = "interdum.libero.dui@acurnaUt.net", Email = "eget.ipsum.Donec@nondui.co.uk", Phone = "1-231-520-8702", ContactEmail = "a.aliquet@anteiaculis.net", PasswordHash = "Password1" },
