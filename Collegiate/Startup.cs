@@ -32,7 +32,7 @@ namespace Collegiate
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(
-                    Configuration.GetConnectionString("CloudConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>()
             //.AddDefaultUI();
