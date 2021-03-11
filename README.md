@@ -8,3 +8,5 @@ Currently, the app is still in development and won't be usable until further not
 
 Image credits:
 David Emrich, Unsplash.com
+Mert Guller, Unsplash.com
+William Bout, Unsplah.com
