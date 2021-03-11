@@ -209,3 +209,20 @@ body {
     background-color: darkgreen;
     color: #fff;
 }
+
+
+#div1 {
+  width:75%;
+  position:absolute;
+  background-color:white;
+  border:1px solid black;
+}
+
+#div2 {
+  position:absolute;
+
+  height:100%;
+  width:100%;
+  background-color:white;
+  border-radius: 15px;
+}
