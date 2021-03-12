@@ -9,8 +9,6 @@ namespace Collegiate.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {
-        private object modelBuilder;
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

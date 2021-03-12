@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Collegiate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200414201845_modelUpdates")]
-    partial class modelUpdates
+    [Migration("20210312021959_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,6 @@ namespace Collegiate.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("PickupLocationDescription")
-                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Type")
@@ -128,37 +127,6 @@ namespace Collegiate.Migrations
                             UserId = "BFF12317-DB43-B3AC-7AA4-3A8DB536ED64",
                             Zip = "49686"
                         });
-                });
-
-            modelBuilder.Entity("Collegiate.Models.Comment", b =>
-                {
-                    b.Property<string>("CommentId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Body")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("DriverOfferId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("TripId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.HasKey("CommentId");
-
-                    b.HasIndex("DriverOfferId");
-
-                    b.HasIndex("TripId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Collegiate.Models.Driver", b =>
@@ -408,28 +376,6 @@ namespace Collegiate.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Collegiate.Models.Preference", b =>
-                {
-                    b.Property<string>("PreferenceId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Music")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("Smoking")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.HasKey("PreferenceId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Preferences");
-                });
-
             modelBuilder.Entity("Collegiate.Models.RiderRequest", b =>
                 {
                     b.Property<string>("RiderRequestId")
@@ -459,17 +405,12 @@ namespace Collegiate.Migrations
                     b.Property<bool>("ToNMC")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("TripId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.HasKey("RiderRequestId");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex("TripId");
 
                     b.HasIndex("UserId");
 
@@ -522,76 +463,6 @@ namespace Collegiate.Migrations
                             ToNMC = false,
                             UserId = "B8C63411-A600-B238-E734-E0F4FDD505F0"
                         });
-                });
-
-            modelBuilder.Entity("Collegiate.Models.Trip", b =>
-                {
-                    b.Property<string>("TripId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("ArrivalTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Campus")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("DepartureAddressId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("DepartureTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("DestinationAddressId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("DriverID")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("DriverOfferId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("FromMeetLocationDesc")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("OnTime")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("SeatsAvailable")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ToMeetLocationDesc")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("ToNMC")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("TripFull")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("TripId");
-
-                    b.HasIndex("DepartureAddressId");
-
-                    b.HasIndex("DestinationAddressId");
-
-                    b.HasIndex("DriverOfferId");
-
-                    b.ToTable("Trips");
-                });
-
-            modelBuilder.Entity("Collegiate.Models.TripUsers", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("TripId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.HasKey("UserId", "TripId");
-
-                    b.HasIndex("TripId");
-
-                    b.ToTable("TripUsers");
                 });
 
             modelBuilder.Entity("Collegiate.Models.User", b =>
@@ -684,7 +555,7 @@ namespace Collegiate.Migrations
                         {
                             Id = "BFF12317-DB43-B3AC-7AA4-3A8DB536ED64",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f1b75dde-a8be-4547-9d82-0b6a86412e56",
+                            ConcurrencyStamp = "b9c1044e-23e2-492e-a0f0-01d68a021172",
                             ContactEmail = "a.aliquet@anteiaculis.net",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "eget.ipsum.Donec@nondui.co.uk",
@@ -695,16 +566,16 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-520-8702",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9036d538-2808-4af0-bd0d-2ccc39107639",
+                            SecurityStamp = "8c089565-5109-40b6-b250-b144060f6675",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 210, DateTimeKind.Local).AddTicks(9992),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 123, DateTimeKind.Local).AddTicks(7355),
                             UserName = "interdum.libero.dui@acurnaUt.net"
                         },
                         new
                         {
                             Id = "B8C63411-A600-B238-E734-E0F4FDD505F0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "528bf37c-f8f6-4b0d-9499-c70e0204a91e",
+                            ConcurrencyStamp = "1d1a2bd2-a8a9-4be6-a520-db65ea861588",
                             ContactEmail = "a.neque@Suspendissealiquetmolestie.edu",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "risus.odio.auctor@non.edu",
@@ -715,16 +586,16 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-811-9180",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "81651db2-a2d7-40f9-9d25-c5df35d74807",
+                            SecurityStamp = "aab2ee67-0ae0-4f66-bcff-119075441601",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 213, DateTimeKind.Local).AddTicks(3106),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 127, DateTimeKind.Local).AddTicks(5746),
                             UserName = "ac.mattis@malesuadafamesac.com"
                         },
                         new
                         {
                             Id = "DDD1ADD9-5AD9-33FC-FB9B-C901B27D232A",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d6b1515-33a5-4bd4-b736-904627fc96be",
+                            ConcurrencyStamp = "650a4c3f-e9ea-4e21-bfe2-ff981e39be1a",
                             ContactEmail = "conubia.nostra@diamPellentesquehabitant.org",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Quisque.porttitor@convallisantelectus.com",
@@ -735,16 +606,16 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-502-5970",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "50353471-eef5-4d0a-9de0-4a7b85e69dfd",
+                            SecurityStamp = "f4533877-3735-4828-8426-1e8458334ff6",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 213, DateTimeKind.Local).AddTicks(3220),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 127, DateTimeKind.Local).AddTicks(5858),
                             UserName = "iaculis@sapienmolestieorci.org"
                         },
                         new
                         {
                             Id = "55D5ADBB-50F6-E6BF-905F-2D72E4105231",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70ad10f4-400d-4141-be9a-a1ad8455803b",
+                            ConcurrencyStamp = "bea1ed4f-040a-480a-9c18-11e768a0c4de",
                             ContactEmail = "dolor@nec.co.uk",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "netus.et@porttitortellus.edu",
@@ -755,16 +626,16 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-153-4083",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "65300544-06f8-4c50-84ab-fb8dad2ac794",
+                            SecurityStamp = "4d825967-481a-4790-b910-1527974f7fd4",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 213, DateTimeKind.Local).AddTicks(3281),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 127, DateTimeKind.Local).AddTicks(5885),
                             UserName = "laoreet@massa.net"
                         },
                         new
                         {
                             Id = "4B941445-7EA2-BB82-5913-D87BE1CB1768",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dfb18e94-331f-421d-999d-18a4d2627575",
+                            ConcurrencyStamp = "4dcef05e-722f-45b4-a48e-d5a047517dd2",
                             ContactEmail = "mauris.Integer.sem@et.co.uk",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tincidunt.adipiscing.Mauris@Maecenas.ca",
@@ -775,16 +646,16 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-415-5106",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9ad89b24-9188-4496-8ac1-1af80b71c81f",
+                            SecurityStamp = "0bfa7e40-1df8-4a80-8d76-99b6f1b821b5",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 213, DateTimeKind.Local).AddTicks(3288),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 127, DateTimeKind.Local).AddTicks(5894),
                             UserName = "magna.Praesent.interdum@Curabitursedtortor.ca"
                         },
                         new
                         {
                             Id = "897978AF-644E-40D1-1D47-60E19C08CBDD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b6d01393-1c90-4a00-b7b2-92885342b577",
+                            ConcurrencyStamp = "a3c8224b-277d-44d0-b6bc-2726bc9eae3b",
                             ContactEmail = "eget@iaculislacuspede.ca",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "libero.Proin.mi@Integer.co.uk",
@@ -795,16 +666,16 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-353-5712",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2b246bce-97d4-431d-99c0-ac56be313410",
+                            SecurityStamp = "526cacd0-7357-44fb-a6c1-cb48e94e5b76",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 213, DateTimeKind.Local).AddTicks(3299),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 127, DateTimeKind.Local).AddTicks(5903),
                             UserName = "porttitor@felisorciadipiscing.co.uk"
                         },
                         new
                         {
                             Id = "339ACF0D-CCCB-C231-298F-CA948C00BCD6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc35247c-a2d5-45d0-b69a-5cb8d898eff5",
+                            ConcurrencyStamp = "0a307fe9-6e14-4ad6-b5bd-7e689e8221e8",
                             ContactEmail = "dui.Cum@Sedcongue.edu",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "sapien.cursus@dolor.com",
@@ -815,16 +686,16 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-323-5744",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c721932d-f6e6-4ad1-bba1-e9312ec4a016",
+                            SecurityStamp = "01fa33d5-6451-479c-a25a-406246f75512",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 213, DateTimeKind.Local).AddTicks(3308),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 127, DateTimeKind.Local).AddTicks(5916),
                             UserName = "Vivamus@Fusce.ca"
                         },
                         new
                         {
                             Id = "56D6F8FA-A0F5-5EAA-351E-29A7A8DD8627",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "650d0f71-e206-4af7-83b3-e9462e11738e",
+                            ConcurrencyStamp = "d16533d4-490c-4500-950f-be58ddc5f154",
                             ContactEmail = "erat.Vivamus@elementumpurusaccumsan.com",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Donec@Nulla.edu",
@@ -835,16 +706,16 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-317-4825",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4f38cc6c-ba01-45f2-8b93-a58687f84aba",
+                            SecurityStamp = "c19bbe1a-2b2f-4aeb-8841-9296f83ce15b",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 213, DateTimeKind.Local).AddTicks(3316),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 127, DateTimeKind.Local).AddTicks(5924),
                             UserName = "ligula.consectetuer.rhoncus@maurissagittis.com"
                         },
                         new
                         {
                             Id = "267ECF2D-E9E0-EC5A-BA50-0F78C452AEEE",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "eb382331-219a-434c-8a9d-7fec45e097df",
+                            ConcurrencyStamp = "0a0af034-6faf-4496-a525-95cea3798c38",
                             ContactEmail = "consectetuer.adipiscing.elit@facilisis.com",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Curabitur.egestas@etlacinia.net",
@@ -855,16 +726,16 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-415-1510",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "184ad3ab-8324-4ef7-bbb1-407299a9594a",
+                            SecurityStamp = "33c47454-a560-4c52-b446-8853c890ba98",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 213, DateTimeKind.Local).AddTicks(3326),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 127, DateTimeKind.Local).AddTicks(5935),
                             UserName = "orci@Aliquam.com"
                         },
                         new
                         {
                             Id = "3344C500-2985-D75D-1E1A-AB1E13F554EF",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0b790c1-d946-49d2-8920-135c9f7b0109",
+                            ConcurrencyStamp = "c6fa86aa-f078-4786-9220-b4f1cfe73235",
                             ContactEmail = "Ut@tellusimperdietnon.org",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ipsum.primis.in@nascetur.net",
@@ -875,9 +746,9 @@ namespace Collegiate.Migrations
                             PasswordHash = "Password1",
                             Phone = "1-231-357-6886",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "45cbfe93-8944-43f7-bd54-1b496f6ff625",
+                            SecurityStamp = "d45d442f-f935-49d1-b07e-91ae50b50376",
                             TwoFactorEnabled = false,
-                            UpdatedOn = new DateTime(2020, 4, 14, 16, 18, 45, 213, DateTimeKind.Local).AddTicks(3334),
+                            UpdatedOn = new DateTime(2021, 3, 11, 21, 19, 59, 127, DateTimeKind.Local).AddTicks(5944),
                             UserName = "tellus@dignissimpharetra.ca"
                         });
                 });
@@ -1055,21 +926,6 @@ namespace Collegiate.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Collegiate.Models.Comment", b =>
-                {
-                    b.HasOne("Collegiate.Models.DriverOffer", null)
-                        .WithMany("DriverComments")
-                        .HasForeignKey("DriverOfferId");
-
-                    b.HasOne("Collegiate.Models.Trip", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("TripId");
-
-                    b.HasOne("Collegiate.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("Collegiate.Models.Driver", b =>
                 {
                     b.HasOne("Collegiate.Models.User", "User")
@@ -1092,56 +948,15 @@ namespace Collegiate.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Collegiate.Models.Preference", b =>
-                {
-                    b.HasOne("Collegiate.Models.User", "User")
-                        .WithOne("Preferences")
-                        .HasForeignKey("Collegiate.Models.Preference", "UserId");
-                });
-
             modelBuilder.Entity("Collegiate.Models.RiderRequest", b =>
                 {
                     b.HasOne("Collegiate.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("Collegiate.Models.Trip", null)
-                        .WithMany("RiderRequests")
-                        .HasForeignKey("TripId");
-
                     b.HasOne("Collegiate.Models.User", "User")
                         .WithMany("RiderRequests")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Collegiate.Models.Trip", b =>
-                {
-                    b.HasOne("Collegiate.Models.Address", "Departure")
-                        .WithMany()
-                        .HasForeignKey("DepartureAddressId");
-
-                    b.HasOne("Collegiate.Models.Address", "Destination")
-                        .WithMany()
-                        .HasForeignKey("DestinationAddressId");
-
-                    b.HasOne("Collegiate.Models.DriverOffer", "DriverOffer")
-                        .WithMany()
-                        .HasForeignKey("DriverOfferId");
-                });
-
-            modelBuilder.Entity("Collegiate.Models.TripUsers", b =>
-                {
-                    b.HasOne("Collegiate.Models.Trip", "Trip")
-                        .WithMany("TripUsers")
-                        .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Collegiate.Models.User", "User")
-                        .WithMany("TripUsers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Collegiate.Models.Vehicle", b =>
