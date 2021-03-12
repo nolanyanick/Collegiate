@@ -4,11 +4,25 @@
     ViewData["Title"] = "Book A Ride From NMC";
 }
 
-<h1>Get Home!</h1>
+<!-- Title -->
+<div class="d-flex justify-content-center mt-3">
 
-<h4>Book A Ride From NMC</h4>
+    <h1 class=" text-success">Get Home!</h1>
+
+</div>
+
+<!-- Subtitle -->
+<div class="d-flex justify-content-center">
+
+    <h4 class="text-secondary">Book a Ride From NMC</h4>
+
+</div>
+
 <hr />
-<div class="row">
+
+<!-- #region Create Request Form -->
+
+<div class="row d-flex justify-content-center">
     <div class="col-md-4">
         <form asp-action="CreateFromNMC">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -42,13 +56,12 @@
                 <span asp-validation-for="DestinationAddressID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-success" />
+                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("FindRide", "Home")'">Back</button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<!-- #endregion -->
 
