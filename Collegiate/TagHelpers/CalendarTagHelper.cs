@@ -85,6 +85,7 @@ namespace Collegiate.TagHelpers
             _db = db;
         }
 
+        //method to build calendar
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "section";
@@ -97,12 +98,12 @@ namespace Collegiate.TagHelpers
         private string GetHtml()
         {
             //current month
-            var monthStart = new DateTime(Year, Month, 1);
+            var monthStart = new DateTime(DateTime.Now.Year, Month, 1);
 
             //generate calendar body
             var html = new XDocument(
                 new XElement("div",
-                    new XAttribute("class", "container-fluid w-76"),
+                    new XAttribute("class", "container-fluid w-100"),
                     new XElement("header",
 
                         //title
@@ -163,7 +164,7 @@ namespace Collegiate.TagHelpers
         IEnumerable<XElement> GetDatesHtml()
         {
             //current month
-            var monthStart = new DateTime(Year, Month, 1);
+            var monthStart = new DateTime(DateTime.Now.Year, Month, 1);
 
             //start date
             var startDate = monthStart.AddDays(-(int)monthStart.DayOfWeek);
