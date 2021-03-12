@@ -99,7 +99,7 @@ namespace Collegiate.Controllers
                                 .Where(d => d.UserId == userId)
                                 .ToList();
 
-            CalandarVM calandarVM = new CalandarVM();
+            CalendarVM calandarVM = new CalendarVM();
 
             //need to filter the locations based on the userId            
             calandarVM.Locations = locations;
