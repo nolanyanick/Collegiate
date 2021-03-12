@@ -12,7 +12,7 @@ namespace Collegiate.Models
 
 
     [NotMapped]
-    public class CalandarVM
+    public class CalendarVM
     {
         private int _month;
 
