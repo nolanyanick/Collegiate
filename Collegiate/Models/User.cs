@@ -36,16 +36,12 @@ namespace Collegiate.Models
         public string ContactEmail { get; set; }
 
         public virtual Driver Driver { get; set; }
-        
-        public virtual Preference Preferences { get; set; }
-
+                
         public virtual ICollection<Address> Addresses { get; set; }
         
         public virtual ICollection<RiderRequest> RiderRequests { get; set; } 
         
         public virtual ICollection<DriverOffer> DriverOffer { get; set; }
-        
-        public ICollection<TripUsers> TripUsers { get; set; }
         
     }
 }

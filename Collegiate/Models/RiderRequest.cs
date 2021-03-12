@@ -14,7 +14,7 @@ namespace Collegiate.Models
         public DateTime ArrivalTime { get; set; }
 
         public DateTime ReturnTime { get; set; }
-
+    
         
         [ForeignKey("Address")]
         public string AddressId { get; set; }
