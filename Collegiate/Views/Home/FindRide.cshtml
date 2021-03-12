@@ -1,13 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Requests & Offers";
-    @model Collegiate.Models.CalandarVM;
+    @model Collegiate.Models.CalendarVM;
 }
-
-<style>
-    .sidenav {
-        min-width: 20vw;
-    }
-</style>
 
 <!-- Model data -->
 <script>
@@ -15,9 +9,16 @@
     var offers = @Html.Raw(Json.Serialize(Model.DriverOffers));
     var requests = @Html.Raw(Json.Serialize(Model.RiderRequest));
 </script>
+
+
 <div class="container" id="wraper">
+
+    <!-- #region User Request/Offer Lists -->
+
     <div class="overflow-auto row border-bottom" id="sidebar-wrapper" style="height:300px">
-        @*<div class="sidebar-heading">Rides and Request</div>*@
+
+        <!-- #region Requests List -->
+
         <div class="col">
             @**********************This is where you would hard code in values for ride request cards************@
             @{if ((Model.UserRequests != null) && (Model.UserRequests.Any()))
@@ -85,6 +86,11 @@
                 }
             }
         </div>
+
+        <!-- #endregion -->
+
+        <!-- #region Offers List -->
+
         <div class="col">
             @**********************This is where you would hard code in values for driver offer cards************@
             @{if ((Model.RiderRequest != null) && (!Model.RiderRequest.Any()))
@@ -152,81 +158,18 @@
                     </div>
                 }
             }
-        </div>
-        <div class="col">
-            @**********************This is where you would hard code in values for booked trip cards************@
+        </div>  
+        
+        <!-- #endregion -->
 
-            @{if ((Model.RiderRequest != null) && (!Model.RiderRequest.Any()))
-                {//<a href="#bookedTripsCollapse" class="list-group-item list-group-item-action bg-light" data-toggle="colapse" aria-expanded="false">Booked Trips</a>
-
-
-                    <div class="container">
-                        <div class="row">
-                            <h4 class="col">Your Trips</h4>
-                            <button type="button" onclick="location.href='@Url.Action("ToOrFrom", "RiderRequest")'" class="btn btn-outline-success col">Add a Trip!</button>
-                        </div>
-                    </div>
-
-                    <div class="card" id="bookedTripsCollapse">
-                        <div>
-
-                            <table id="requestsTable1" class="table table-hover">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col" style="border:none">Departure Time</th>
-                                        <th scope="col" style="border:none">Arrival Time</th>
-                                        <th scope="col" style="border:none"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @{
-                                        foreach (var item in Model.UserRequests)
-                                        {
-                                            var address = Model.Locations.ToList().Find(i => i.AddressId == item.AddressId);
-                                            <tr>
-                                                <td> @item.DepartureTime</td>
-                                                <td> @item.ArrivalTime</td>
-                                                <td>
-                                                    <button class="btn btn-link">Edit</button> @*change this to an action link*@
-                                                    <button class="btn btn-link">Cancel</button>@*change this to an action link*@
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <h4>Your Trips</h4>
-
-                    <div class="card">
-                        <div>
-                            <table id="requestsTable1" class="table">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col" style="border:none">No Trips Currently Active</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-center">
-                                        <td><button type="button" onclick="location.href='@Url.Action("ToOrFrom", "RiderRequest")'" class="btn btn-outline-success">Book a trip!</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                }
-            }
-        </div>
     </div>
 
+    <!-- #endregion -->
+
+    <!-- #region Calendar -->
     <div class="row">
         <!-- Calendar-->
-        <calendar year="2020" month="@Model.Month" />
+        <calendar month="@Model.Month" />
 
         <!-- Requests Modal -->
         <div id="RequestsModal" class="modal fade" role="dialog">
@@ -295,4 +238,7 @@
             </div>
         </div>
     </div>
+
+    <!-- #endregion -->
+
 </div>
