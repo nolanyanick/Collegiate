@@ -1,67 +1,77 @@
-﻿//vars
-var date;
+﻿var date;
 var listOfRequests = [];
 
-//requests.forEach(testing);
-
-//function testing(item, index) {
-//    console.log("Request:");
-//    console.log(item);
-//    console.log();
-//}
-
-//event handler to display data in modal content on modal open
+// event handler to display data in modal content on modal open
 $('#RequestsModal').on('show.bs.modal', function (event) {
+
+    // get and reset the text of the modal body
     $('#requestsTable').find("#requestsTableBody").text("");
+
+    // get the date selected by the user
     date = $(event.relatedTarget).data('date');
 
+    // reset list of requests to be displayed
     listOfRequests = [];
-    requests.forEach(displayRequests);
-    listOfRequests.forEach(requestDisplay);
+
+    // get all requests that correspond to the date selected by the user
+    requests.forEach(getRequests);
+
+    // display the requests
+    listOfRequests.forEach(showRequest);
 });
 
-//function to get list of requests for a given day
-function displayRequests(item, index) {
+// function to get list of requests for a given day
+function getRequests(item, index) {
 
-    var miliseconds = Date.parse(date);
-    var d = new Date(miliseconds);
+    var dateInMiliseconds = Date.parse(date);
+    var currentDate = new Date(dateInMiliseconds);
 
     if (item.toNMC == true) {
-        var mesc = Date.parse(item.arrivalTime);
-        var dd = new Date(mesc);
+        var arrivalTimeMsec = Date.parse(item.arrivalTime);
+        var currentArrivalTime = new Date(arrivalTimeMsec);
 
-        d.setHours(0, 0, 0, 0);
-        dd.setHours(0, 0, 0, 0);
+        currentDate.setHours(0, 0, 0, 0);
+        currentArrivalTime.setHours(0, 0, 0, 0);
 
-        if (dd.getTime() == d.getTime()) {
+        if (currentArrivalTime.getTime() == currentDate.getTime()) {
             listOfRequests.push(item);
         }
     }
     else {
-        var mesc = Date.parse(item.departureTime);
-        var dd = new Date(mesc);
+        var departureTimeMsec = Date.parse(item.departureTime);
+        var currentDepartureTime = new Date(departureTimeMsec);
 
-        d.setHours(0, 0, 0, 0);
-        dd.setHours(0, 0, 0, 0);
+        currentDate.setHours(0, 0, 0, 0);
+        currentDepartureTime.setHours(0, 0, 0, 0);
 
-        if (dd.getTime() == d.getTime()) {
+        if (currentDepartureTime.getTime() == currentDate.getTime()) {
             listOfRequests.push(item);
         }
     }
 }
 
-//function to display requests for a given day in modal content
-function requestDisplay(item, index) {
+// function to display requests for a given day in modal content
+function showRequest(item, index) {
 
+    // get departure time hours and set AM or PM
     var departureHours = new Date(item.departureTime).getHours();
     var ampmDeparture = departureHours >= 12 ? 'PM' : 'AM';
+
+    // convert to 12 hour format
     departureHours = (departureHours % 12) || 12
+
+    // get departure time minutes and append zeros
     var departureMinutes = new Date(item.departureTime).getUTCMinutes();
     departureMinutes = addZeros(departureMinutes)
 
+    // get arrival time hours and set AM or PM
     var arrivalHours = new Date(item.arrivalTime).getHours();
     var ampmArrival = arrivalHours >= 12 ? 'PM' : 'AM'
+
+    // convert to 12 hour format
     arrivalHours = (arrivalHours % 12) || 12
+
+    // get arrival time minutes and append zeros
     var arrivalMinutes = new Date(item.arrivalTime).getUTCMinutes();
     arrivalMinutes = addZeros(arrivalMinutes)
 
@@ -87,21 +97,21 @@ function requestDisplay(item, index) {
     }
 }
 
-//function to add extra zeros to time in dates, increases readability
+// function to add extra zeros to time in dates, increases readability
 function addZeros(mins) {
     return (mins < 10 ? '0' : '') + mins;
 }
 
-//function to perform searches for addresses
+// function to perform searches for addresses
 function requestsSearch() {
-    // Declare variables
+    // declare variables
     var input, filter, table, tr, td, i, txtValue, test;
     input = document.getElementById("requestsSearchInput");
     filter = input.value.toUpperCase();
     table = document.getElementById("requestsTable");
     tr = table.getElementsByTagName("tr");
 
-    // Loop through all table rows, and hide those who don't match the search query
+    // loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];
         console.log(td);
