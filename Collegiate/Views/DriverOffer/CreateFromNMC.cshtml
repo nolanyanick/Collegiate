@@ -4,32 +4,48 @@
     ViewData["Title"] = "Create Offer";
 }
 
-<h1>Create a Ride Offer</h1>
+<!-- Title -->
+<div class="d-flex justify-content-center mt-3">
+
+    <h1 class=" text-success">Lets Pick Someone Up</h1>
+
+</div>
+
+<!-- Subtitle -->
+<div class="d-flex justify-content-center">
+
+    <h4 class="text-secondary">Offer A Ride Home</h4>
+
+</div>
+
+<hr />
+
+
 <form asp-area="" asp-controller="RideRequest" asp-action="Create" method="post">
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group" style="display: table-cell;">
         @*Departure Time*@
         <label asp-for="Address"></label>
-        <input asp-for="Address" class="form-control" name="Address"/>
+        <input asp-for="Address" class="form-control" name="Address" />
         <span asp-validation-for="Address" class="text-danger"></span>
     </div>
     <br />
     <div class="form-group" style="display: table-cell;">
         @*Departure Time*@
         <label asp-for="DepartureTime"></label>
-        <input asp-for="DepartureTime" class="form-control" name="DepartureTime"/>
+        <input asp-for="DepartureTime" class="form-control" name="DepartureTime" />
         <span asp-validation-for="DepartureTime" class="text-danger"></span>
         @*Arrival Time*@
         <label asp-for="ArrivalTime"></label>
-        <input asp-for="ArrivalTime" class="form-control" name="ArrivalTime"/>
+        <input asp-for="ArrivalTime" class="form-control" name="ArrivalTime" />
         <span asp-validation-for="ArrivalTime" class="text-danger"></span>
     </div>
-    <br/>
+    <br />
     <div class="form-group" style="display: table-cell;">
         @*Departure Time*@
         <label asp-for="Campus"></label>
-        <input asp-for="Campus" class="form-control" name="Campus"/>
+        <input asp-for="Campus" class="form-control" name="Campus" />
         <span asp-validation-for="Campus" class="text-danger"></span>
     </div>
 </form>

@@ -22,7 +22,7 @@ namespace Collegiate.Controllers
         }
 
         // GET: DriverOffer/Create
-        public ActionResult Create()
+        public ActionResult CreateToNMC()
         {
             return View();
         }
@@ -30,7 +30,7 @@ namespace Collegiate.Controllers
         // POST: DriverOffer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CreateToNMC(IFormCollection collection)
         {
             try
             {
